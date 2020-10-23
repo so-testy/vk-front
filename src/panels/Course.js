@@ -130,6 +130,7 @@ const Courses = ({ id, course }) => {
                                                 <Icon20CheckCircleFillGreen
                                                     height={16}
                                                     width={16}
+                                                    style={{ marginLeft: 6 }}
                                                 />
                                             )}
                                         </span>
