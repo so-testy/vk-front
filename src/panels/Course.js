@@ -20,6 +20,9 @@ import CourseCard from '../components/CourseCard';
 import useNavigation from '../hooks/useNavigation';
 
 import Icon20CheckCircleFillGreen from '@vkontakte/icons/dist/20/check_circle_fill_green';
+import Icon24CheckCircleOn from '@vkontakte/icons/dist/24/check_circle_on';
+
+import config from '../config';
 
 const styles = {
     disabledCard: {
@@ -49,7 +52,7 @@ const Courses = ({ id, course }) => {
                 description:
                     'Моргать нужно быстро, не напрягая глаз в течение полминуты.',
                 isDone: true,
-                duration: 10,
+                duration: 10 * 60,
             },
             {
                 id: 2,
@@ -57,23 +60,23 @@ const Courses = ({ id, course }) => {
                 description:
                     'Глазами нужно водить поочередно вправо и влево, в течение одной минуты, потом поморгать 10 секунд.',
                 isDone: true,
-                duration: 10,
+                duration: 6 * 60,
             },
             {
                 id: 3,
                 name: 'Диагонали',
                 description:
                     'Попеременно нужно переводить взгляд по диагонали. Для этого хорошо подходит окно.',
-                isDone: true,
-                duration: 10,
+                isDone: false,
+                duration: 4 * 60,
             },
             {
                 id: 4,
                 name: 'Вертикаль',
                 description:
                     'Как понятно из названия, движения глаз направлены вверх и вниз.',
-                isDone: true,
-                duration: 10,
+                isDone: false,
+                duration: 6 * 60,
             },
         ]);
     }, []);
@@ -83,12 +86,12 @@ const Courses = ({ id, course }) => {
     return (
         <Panel id={id}>
             <PanelHeader left={<PanelHeaderBack onClick={goToCourses} />}>
-                {course.title}
+                {config.appName}
             </PanelHeader>
             <Group separator="hide">
                 <Div style={{ paddingBottom: 0 }}>
                     <Title
-                        level="1"
+                        level="2"
                         weight="medium"
                         style={{ marginBottom: 16 }}
                     >
@@ -98,36 +101,74 @@ const Courses = ({ id, course }) => {
                 </Div>
             </Group>
             <Group separator="hide">
-                <Div style={{ paddingBottom: 0 }}>
-                    <Title level="1" weight="medium">
+                <Div>
+                    <Title level="2" weight="medium">
                         Упражнения
                     </Title>
                 </Div>
-                {exercises.map(exercise => {
-                    const { minutes, seconds } = getDuration(exercise.duration);
+                <CardGrid>
+                    {exercises.map(exercise => {
+                        const { minutes, seconds } = getDuration(
+                            exercise.duration,
+                        );
 
-                    const courseDurationText = `${minutes} мин. ${seconds} сек.`;
+                        const courseDurationText = `${minutes} мин. ${seconds} сек.`;
 
-                    return (
-                        <CardGrid key={exercise.id} style={{ marginTop: 8 }}>
-                            <Card size="l" mode="shadow">
+                        return (
+                            <Card
+                                size="l"
+                                mode="outline"
+                                key={exercise.id}
+                                style={{ marginTop: 16 }}
+                            >
                                 <Div>
                                     <Title
-                                        level="2"
+                                        level="3"
                                         weight="medium"
-                                        style={{ marginBottom: 16 }}
+                                        style={{
+                                            textTransform: 'uppercase',
+                                            marginBottom: 8,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'space-between',
+                                        }}
                                     >
-                                        {exercise.name}
-                                        <Icon20CheckCircleFillGreen />
+                                        <span
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            {exercise.name}
+                                            {exercise.isDone && (
+                                                <Icon24CheckCircleOn
+                                                    height={20}
+                                                    width={20}
+                                                    style={{
+                                                        marginLeft: 8,
+                                                        color: '#3F8AE0',
+                                                    }}
+                                                />
+                                            )}
+                                        </span>
+                                        <Text
+                                            weight="regular"
+                                            style={{ textTransform: 'none' }}
+                                        >
+                                            {courseDurationText}
+                                        </Text>
                                     </Title>
-                                    <Text weight="regular">
+                                    <Text
+                                        weight="regular"
+                                        style={{ color: '#666' }}
+                                    >
                                         {exercise.description}
                                     </Text>
                                 </Div>
                             </Card>
-                        </CardGrid>
-                    );
-                })}
+                        );
+                    })}
+                </CardGrid>
             </Group>
         </Panel>
     );
