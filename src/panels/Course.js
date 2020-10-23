@@ -11,22 +11,13 @@ import {
     Card,
     Title,
     Text,
-    InfoRow,
-    Progress,
-    Banner,
     PanelHeaderBack,
+    FixedLayout,
 } from '@vkontakte/vkui';
-import CourseCard from '../components/CourseCard';
+
 import useNavigation from '../hooks/useNavigation';
 
 import Icon20CheckCircleFillGreen from '@vkontakte/icons/dist/20/check_circle_fill_green';
-
-const styles = {
-    disabledCard: {
-        opacity: 0.5,
-        pointerEvents: 'none',
-    },
-};
 
 const getDuration = duration => {
     const minutes = Math.floor(duration / 60);
@@ -49,7 +40,7 @@ const Courses = ({ id, course }) => {
                 description:
                     'Моргать нужно быстро, не напрягая глаз в течение полминуты.',
                 isDone: true,
-                duration: 10,
+                duration: 10 * 60,
             },
             {
                 id: 2,
@@ -57,26 +48,29 @@ const Courses = ({ id, course }) => {
                 description:
                     'Глазами нужно водить поочередно вправо и влево, в течение одной минуты, потом поморгать 10 секунд.',
                 isDone: true,
-                duration: 10,
+                duration: 6 * 60,
             },
             {
                 id: 3,
                 name: 'Диагонали',
                 description:
                     'Попеременно нужно переводить взгляд по диагонали. Для этого хорошо подходит окно.',
-                isDone: true,
-                duration: 10,
+                isDone: false,
+                duration: 4 * 60,
             },
             {
                 id: 4,
                 name: 'Вертикаль',
                 description:
                     'Как понятно из названия, движения глаз направлены вверх и вниз.',
-                isDone: true,
-                duration: 10,
+                isDone: false,
+                duration: 6 * 60,
             },
         ]);
     }, []);
+
+    const isWasStarted =
+        exercises.filter(exercise => exercise.isDone).length > 0;
 
     const goToCourses = useNavigation({ view: 'courses', panel: 'courses' });
 
@@ -86,49 +80,86 @@ const Courses = ({ id, course }) => {
                 {course.title}
             </PanelHeader>
             <Group separator="hide">
-                <Div style={{ paddingBottom: 0 }}>
-                    <Title
-                        level="1"
-                        weight="medium"
-                        style={{ marginBottom: 16 }}
-                    >
-                        {course.title}
-                    </Title>
-                    <Text weight="regular">{course.description}</Text>
-                </Div>
-            </Group>
-            <Group separator="hide">
-                <Div style={{ paddingBottom: 0 }}>
-                    <Title level="1" weight="medium">
+                <Div style={{ marginBottom: 4 }}>
+                    <Title level="2" weight="medium">
                         Упражнения
                     </Title>
                 </Div>
-                {exercises.map(exercise => {
-                    const { minutes, seconds } = getDuration(exercise.duration);
+                <CardGrid>
+                    {exercises.map(exercise => {
+                        const { minutes, seconds } = getDuration(
+                            exercise.duration,
+                        );
 
-                    const courseDurationText = `${minutes} мин. ${seconds} сек.`;
+                        const minutesText = minutes ? minutes + ' мин.' : '';
+                        const secondsText = seconds ? seconds + ' мин.' : '';
 
-                    return (
-                        <CardGrid key={exercise.id} style={{ marginTop: 8 }}>
-                            <Card size="l" mode="shadow">
+                        const courseDurationText = `${minutesText}${secondsText}`;
+
+                        return (
+                            <Card
+                                size="l"
+                                mode="shadow"
+                                key={exercise.id}
+                                style={{
+                                    boxShadow:
+                                        '0 2px 24px 0 rgba(0,0,0,.04), 0 0 2px 0 rgba(0,0,0,.04)',
+                                    marginTop: 12,
+                                }}
+                            >
                                 <Div>
                                     <Title
-                                        level="2"
+                                        level="3"
                                         weight="medium"
-                                        style={{ marginBottom: 16 }}
+                                        style={{
+                                            textTransform: 'uppercase',
+                                            marginBottom: 8,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'space-between',
+                                        }}
                                     >
-                                        {exercise.name}
-                                        <Icon20CheckCircleFillGreen />
+                                        <span
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            {exercise.name}
+                                            {exercise.isDone && (
+                                                <Icon20CheckCircleFillGreen
+                                                    height={16}
+                                                    width={16}
+                                                    style={{ marginLeft: 6 }}
+                                                />
+                                            )}
+                                        </span>
+                                        <Text
+                                            weight="regular"
+                                            style={{ textTransform: 'none' }}
+                                        >
+                                            {courseDurationText}
+                                        </Text>
                                     </Title>
-                                    <Text weight="regular">
+                                    <Text
+                                        weight="regular"
+                                        style={{ color: '#666' }}
+                                    >
                                         {exercise.description}
                                     </Text>
                                 </Div>
                             </Card>
-                        </CardGrid>
-                    );
-                })}
+                        );
+                    })}
+                </CardGrid>
             </Group>
+            <FixedLayout vertical="bottom">
+                <Div>
+                    <Button size="xl">
+                        {isWasStarted ? 'Продолжить занятие' : 'Начать занятие'}
+                    </Button>
+                </Div>
+            </FixedLayout>
         </Panel>
     );
 };

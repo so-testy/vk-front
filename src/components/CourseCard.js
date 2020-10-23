@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
-import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 import Button from '@vkontakte/vkui/dist/components/Button/Button';
-import Group from '@vkontakte/vkui/dist/components/Group/Group';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
-import Icon16ClockCircleFill from '@vkontakte/icons/dist/16/clock_circle_fill';
 
 import { CardGrid, Card, Title, Text } from '@vkontakte/vkui';
 import { PROGRESS_NONE } from '../panels/Courses';
@@ -15,25 +11,37 @@ const styles = {
         opacity: 0.5,
         pointerEvents: 'none',
     },
+    card: {
+        boxShadow: '0 2px 24px 0 rgba(0,0,0,.04), 0 0 2px 0 rgba(0,0,0,.04)',
+    },
 };
 
 const CourseCard = ({ course, setCourse, isButtonVisible = true }) => {
-    const courseDurationText =
-        course.progress.type === PROGRESS_NONE
-            ? `${course.duration} минут`
-            : '';
-
     return (
-        <CardGrid
-            key={course.id}
-            style={course.isDisabled ? styles.disabledCard : null}
-        >
-            <Card size="l" mode="outline">
+        <CardGrid key={course.id}>
+            <Card
+                size="l"
+                mode={course.isDisabled ? 'outline' : 'shadow'}
+                style={{
+                    ...(course.isDisabled ? styles.disabledCard : styles.card),
+                    marginTop: 12,
+                }}
+            >
                 <div
                     style={{
-                        backgroundColor: '#fff',
-                        margin: 1,
-                        height: 100,
+                        width: '100%',
+                        position: 'absolute',
+                        zIndex: -1,
+                        height: '100%',
+                        background: `rgba(0, 0, 0, 0.1) url("${course.imageUrl}") no-repeat`,
+                        backgroundPositionX: '150%',
+                        backgroundPositionY: -100,
+                        borderRadius: 'inherit',
+                        opacity: 0.2,
+                    }}
+                />
+                <div
+                    style={{
                         borderRadius: 'inherit',
                     }}
                 >
@@ -43,33 +51,58 @@ const CourseCard = ({ course, setCourse, isButtonVisible = true }) => {
                             alignItems: 'center',
                         }}
                     >
-                        <Icon16ClockCircleFill
-                            style={{ marginRight: 8 }}
-                            color="white"
-                        />
-                        <Text level="2" weight="regular">
-                            {courseDurationText}
-                        </Text>
+                        {course.progress.type === PROGRESS_NONE ? (
+                            <div>
+                                <Title level="1" weight="medium">
+                                    {course.duration}
+                                </Title>
+                                <Text style={{ color: '#666' }}>
+                                    минут на занятие
+                                </Text>
+                            </div>
+                        ) : (
+                            <div>
+                                <span
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'flex-end',
+                                    }}
+                                >
+                                    <Title level="1" weight="medium">
+                                        {course.duration}
+                                    </Title>
+                                    <Text style={{ marginLeft: 4 }}>дней</Text>
+                                </span>
+                                <Text>продолжительность курса</Text>
+                            </div>
+                        )}
                     </Div>
                 </div>
                 <Div>
-                    <Title level="2" weight="medium" style={{ marginTop: 16 }}>
+                    <Title level="2" weight="medium">
                         {course.title}
                     </Title>
-                    <Text weight="regular" style={{ marginTop: 16 }}>
+                    <Text
+                        weight="regular"
+                        style={{ marginTop: 8, color: '#666' }}
+                    >
                         {course.description}
                     </Text>
                     {isButtonVisible && (
                         <Button
                             size="m"
-                            mode="outline"
+                            mode="primary"
                             style={{
                                 width: '100%',
                                 marginTop: 16,
                             }}
                             onClick={() => setCourse(course)}
                         >
-                            {course.startDate ? 'Продолжить' : 'Начать курс'}
+                            {course.startDate
+                                ? course.progress.type === PROGRESS_NONE
+                                    ? 'Перейти'
+                                    : 'Продолжить'
+                                : 'Начать курс'}
                         </Button>
                     )}
                 </Div>

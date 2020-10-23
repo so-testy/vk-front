@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import bridge from '@vkontakte/vk-bridge';
 import View from '@vkontakte/vkui/dist/components/View/View';
 import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
-import { Root } from '@vkontakte/vkui';
-
+import { Root, ModalRoot, ModalCard, Text } from '@vkontakte/vkui';
+import Icon56InfoOutline from '@vkontakte/icons/dist/56/info_outline';
 import '@vkontakte/vkui/dist/vkui.css';
 
 import Courses, { PROGRESS_NONE } from './panels/Courses';
@@ -13,25 +13,13 @@ import NavigationContext from './NavigationContext';
 import useNavigation from './hooks/useNavigation';
 
 const App = () => {
-    const [activePanel, setActivePanel] = useState('course');
+    const [activePanel, setActivePanel] = useState('courses');
     const [activeView, setActiveView] = useState('courses');
+    const [activeModal, setActiveModal] = useState(null);
     // const [fetchedUser, setUser] = useState(null);
     // const [popout, setPopout] = useState(<ScreenSpinner size="large" />);
 
-    const [course, setCourse] = useState({
-        id: 1,
-        title: 'Гимнастика для глаз',
-        description: 'После длительной и напряженной зрительной работы',
-        imageUrl: '',
-        startDate: new Date(),
-        progress: {
-            type: PROGRESS_NONE,
-        },
-        duration: 10,
-        isDisabled: false,
-    });
-
-    const goToCourse = useNavigation({ view: 'courses', panel: 'course' });
+    const [course, setCourse] = useState(null);
 
     // useEffect(() => {
     // 	bridge.subscribe(({ detail: { type, data }}) => {
@@ -53,19 +41,50 @@ const App = () => {
     //     setActivePanel(e.currentTarget.dataset.to);
     // };
 
+    const modal = (
+        <ModalRoot activeModal={activeModal}>
+            <ModalCard
+                id="welcome"
+                onClose={() => setActiveModal(null)}
+                // icon={<Icon56InfoOutline />}
+                header="Добро пожаловать!"
+                caption={
+                    <Text>
+                        <b>Вижен</b> - приложение для профилактики вашего
+                        зрения.
+                    </Text>
+                }
+                actions={[
+                    {
+                        title: 'Оставить',
+                        mode: 'primary',
+                        action: () => setActiveModal(null),
+                    },
+                    {
+                        title: 'Отключить',
+                        mode: 'secondary',
+                        action: () => setActiveModal(null),
+                    },
+                ]}
+            ></ModalCard>
+        </ModalRoot>
+    );
+
     return (
         <NavigationContext.Provider
             value={{
                 activeView,
                 activePanel,
-                updateRoute: ({ view, panel }) => {
+                activeModal,
+                updateRoute: ({ view, panel, modal }) => {
                     setActivePanel(panel || activePanel);
                     setActiveView(view || activeView);
+                    setActiveModal(modal || activeModal);
                 },
             }}
         >
             <Root activeView={activeView}>
-                <View id="courses" activePanel={activePanel}>
+                <View id="courses" modal={modal} activePanel={activePanel}>
                     <Courses
                         id="courses"
                         setCourse={course => {
