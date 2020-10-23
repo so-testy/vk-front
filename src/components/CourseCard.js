@@ -100,7 +100,7 @@ const CourseCard = ({ course, setCourse, isButtonVisible = true }) => {
                         >
                             {course.startDate
                                 ? course.progress.type === PROGRESS_NONE
-                                    ? 'Начать занятие'
+                                    ? 'Перейти'
                                     : 'Продолжить'
                                 : 'Начать курс'}
                         </Button>

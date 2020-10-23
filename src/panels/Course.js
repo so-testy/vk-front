@@ -11,27 +11,13 @@ import {
     Card,
     Title,
     Text,
-    InfoRow,
-    Progress,
-    Banner,
     PanelHeaderBack,
     FixedLayout,
-    Separator,
 } from '@vkontakte/vkui';
-import CourseCard from '../components/CourseCard';
+
 import useNavigation from '../hooks/useNavigation';
 
 import Icon20CheckCircleFillGreen from '@vkontakte/icons/dist/20/check_circle_fill_green';
-import Icon24CheckCircleOn from '@vkontakte/icons/dist/24/check_circle_on';
-
-import config from '../config';
-
-const styles = {
-    disabledCard: {
-        opacity: 0.5,
-        pointerEvents: 'none',
-    },
-};
 
 const getDuration = duration => {
     const minutes = Math.floor(duration / 60);
@@ -83,6 +69,9 @@ const Courses = ({ id, course }) => {
         ]);
     }, []);
 
+    const isWasStarted =
+        exercises.filter(exercise => exercise.isDone).length > 0;
+
     const goToCourses = useNavigation({ view: 'courses', panel: 'courses' });
 
     return (
@@ -90,18 +79,6 @@ const Courses = ({ id, course }) => {
             <PanelHeader left={<PanelHeaderBack onClick={goToCourses} />}>
                 {course.title}
             </PanelHeader>
-            {/* <Group separator="hide">
-                <Div style={{ paddingBottom: 0 }}>
-                    <Title
-                        level="2"
-                        weight="medium"
-                        style={{ marginBottom: 16 }}
-                    >
-                        {course.title}
-                    </Title>
-                    <Text weight="regular">{course.description}</Text>
-                </Div>
-            </Group> */}
             <Group separator="hide">
                 <Div style={{ marginBottom: 4 }}>
                     <Title level="2" weight="medium">
@@ -114,9 +91,10 @@ const Courses = ({ id, course }) => {
                             exercise.duration,
                         );
 
-                        const courseDurationText = `${
-                            minutes ? minutes + ' мин.' : ''
-                        }${seconds ? seconds + ' сек.' : ''}`;
+                        const minutesText = minutes ? minutes + ' мин.' : '';
+                        const secondsText = seconds ? seconds + ' мин.' : '';
+
+                        const courseDurationText = `${minutesText}${secondsText}`;
 
                         return (
                             <Card
@@ -152,18 +130,12 @@ const Courses = ({ id, course }) => {
                                                 <Icon20CheckCircleFillGreen
                                                     height={16}
                                                     width={16}
-                                                    style={{
-                                                        marginLeft: 8,
-                                                        color: '#3F8AE0',
-                                                    }}
                                                 />
                                             )}
                                         </span>
                                         <Text
                                             weight="regular"
-                                            style={{
-                                                textTransform: 'none',
-                                            }}
+                                            style={{ textTransform: 'none' }}
                                         >
                                             {courseDurationText}
                                         </Text>
@@ -182,7 +154,9 @@ const Courses = ({ id, course }) => {
             </Group>
             <FixedLayout vertical="bottom">
                 <Div>
-                    <Button size="xl">Начать занятие</Button>
+                    <Button size="xl">
+                        {isWasStarted ? 'Продолжить занятие' : 'Начать занятие'}
+                    </Button>
                 </Div>
             </FixedLayout>
         </Panel>
