@@ -11,16 +11,22 @@ const styles = {
         opacity: 0.5,
         pointerEvents: 'none',
     },
+    card: {
+        boxShadow: '0 2px 24px 0 rgba(0,0,0,.04), 0 0 2px 0 rgba(0,0,0,.04)',
+    },
 };
 
 const CourseCard = ({ course, setCourse, isButtonVisible = true }) => {
-    console.log(course);
     return (
-        <CardGrid
-            key={course.id}
-            style={course.isDisabled ? styles.disabledCard : null}
-        >
-            <Card size="l" mode={course.isDisabled ? 'outline' : 'shadow'}>
+        <CardGrid key={course.id}>
+            <Card
+                size="l"
+                mode={course.isDisabled ? 'outline' : 'shadow'}
+                style={{
+                    ...(course.isDisabled ? styles.disabledCard : styles.card),
+                    marginTop: 12,
+                }}
+            >
                 <div
                     style={{
                         width: '100%',

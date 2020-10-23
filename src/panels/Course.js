@@ -15,6 +15,8 @@ import {
     Progress,
     Banner,
     PanelHeaderBack,
+    FixedLayout,
+    Separator,
 } from '@vkontakte/vkui';
 import CourseCard from '../components/CourseCard';
 import useNavigation from '../hooks/useNavigation';
@@ -86,9 +88,9 @@ const Courses = ({ id, course }) => {
     return (
         <Panel id={id}>
             <PanelHeader left={<PanelHeaderBack onClick={goToCourses} />}>
-                {config.appName}
+                {course.title}
             </PanelHeader>
-            <Group separator="hide">
+            {/* <Group separator="hide">
                 <Div style={{ paddingBottom: 0 }}>
                     <Title
                         level="2"
@@ -99,9 +101,9 @@ const Courses = ({ id, course }) => {
                     </Title>
                     <Text weight="regular">{course.description}</Text>
                 </Div>
-            </Group>
+            </Group> */}
             <Group separator="hide">
-                <Div>
+                <Div style={{ marginBottom: 4 }}>
                     <Title level="2" weight="medium">
                         Упражнения
                     </Title>
@@ -112,14 +114,20 @@ const Courses = ({ id, course }) => {
                             exercise.duration,
                         );
 
-                        const courseDurationText = `${minutes} мин. ${seconds} сек.`;
+                        const courseDurationText = `${
+                            minutes ? minutes + ' мин.' : ''
+                        }${seconds ? seconds + ' сек.' : ''}`;
 
                         return (
                             <Card
                                 size="l"
-                                mode="outline"
+                                mode="shadow"
                                 key={exercise.id}
-                                style={{ marginTop: 16 }}
+                                style={{
+                                    boxShadow:
+                                        '0 2px 24px 0 rgba(0,0,0,.04), 0 0 2px 0 rgba(0,0,0,.04)',
+                                    marginTop: 12,
+                                }}
                             >
                                 <Div>
                                     <Title
@@ -141,9 +149,9 @@ const Courses = ({ id, course }) => {
                                         >
                                             {exercise.name}
                                             {exercise.isDone && (
-                                                <Icon24CheckCircleOn
-                                                    height={20}
-                                                    width={20}
+                                                <Icon20CheckCircleFillGreen
+                                                    height={16}
+                                                    width={16}
                                                     style={{
                                                         marginLeft: 8,
                                                         color: '#3F8AE0',
@@ -153,7 +161,9 @@ const Courses = ({ id, course }) => {
                                         </span>
                                         <Text
                                             weight="regular"
-                                            style={{ textTransform: 'none' }}
+                                            style={{
+                                                textTransform: 'none',
+                                            }}
                                         >
                                             {courseDurationText}
                                         </Text>
@@ -170,6 +180,11 @@ const Courses = ({ id, course }) => {
                     })}
                 </CardGrid>
             </Group>
+            <FixedLayout vertical="bottom">
+                <Div>
+                    <Button size="xl">Начать занятие</Button>
+                </Div>
+            </FixedLayout>
         </Panel>
     );
 };

@@ -13,7 +13,7 @@ import NavigationContext from './NavigationContext';
 import useNavigation from './hooks/useNavigation';
 
 const App = () => {
-    const [activePanel, setActivePanel] = useState('courses');
+    const [activePanel, setActivePanel] = useState('course');
     const [activeView, setActiveView] = useState('courses');
     // const [fetchedUser, setUser] = useState(null);
     // const [popout, setPopout] = useState(<ScreenSpinner size="large" />);
