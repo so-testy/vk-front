@@ -13,26 +13,13 @@ import NavigationContext from './NavigationContext';
 import useNavigation from './hooks/useNavigation';
 
 const App = () => {
-    const [activePanel, setActivePanel] = useState('course');
+    const [activePanel, setActivePanel] = useState('courses');
     const [activeView, setActiveView] = useState('courses');
     const [activeModal, setActiveModal] = useState(null);
     // const [fetchedUser, setUser] = useState(null);
     // const [popout, setPopout] = useState(<ScreenSpinner size="large" />);
 
-    const [course, setCourse] = useState({
-        id: 1,
-        title: 'Гимнастика для глаз',
-        description: 'После длительной и напряженной зрительной работы',
-        imageUrl: '',
-        startDate: new Date(),
-        progress: {
-            type: PROGRESS_NONE,
-        },
-        duration: 10,
-        isDisabled: false,
-    });
-
-    const goToCourse = useNavigation({ view: 'courses', panel: 'course' });
+    const [course, setCourse] = useState(null);
 
     // useEffect(() => {
     // 	bridge.subscribe(({ detail: { type, data }}) => {
