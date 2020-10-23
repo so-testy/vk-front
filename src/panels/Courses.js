@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
 
+import { getSpeechFromText } from '../api';
 import CourseCard from '../components/CourseCard';
 import config from '../config';
 
@@ -11,6 +12,8 @@ export const PROGRESS_ENDING = 'PROGRESS_ENDING';
 
 const Courses = ({ id, setCourse }) => {
     const [courses, setCourses] = useState([]);
+    const [audio, setAudio] = useState([]);
+    const audioEl = useRef();
 
     useEffect(() => {
         setCourses([
@@ -55,6 +58,9 @@ const Courses = ({ id, setCourse }) => {
                 isDisabled: true,
             },
         ]);
+
+        // getSpeechFromText('hello').then(data => {
+        // })
     }, []);
 
     return (
@@ -65,6 +71,7 @@ const Courses = ({ id, setCourse }) => {
                     return <CourseCard course={course} setCourse={setCourse} />;
                 })}
             </Group>
+            <audio ref={audioEl} src={audio}></audio>
         </Panel>
     );
 };
