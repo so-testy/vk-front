@@ -1,6 +1,12 @@
 export const ex1 = [
     {
         title: '',
+        description: 'Готовы?',
+        duration: 3,
+        sleepAfter: 0,
+    },
+    {
+        title: '',
         description: 'Быстро моргайте',
         duration: 30,
         sleepAfter: 10,
@@ -8,6 +14,12 @@ export const ex1 = [
 ];
 
 export const ex2 = [
+    {
+        title: '',
+        description: 'Приготовьтесь.',
+        duration: 3,
+        sleepAfter: 0,
+    },
     {
         title: '',
         description: 'Поочерёдно водите глазами вправо и влево',
@@ -23,6 +35,12 @@ export const ex2 = [
 ];
 
 export const ex3 = [
+    {
+        title: '',
+        description: 'Начинаем...',
+        duration: 3,
+        sleepAfter: 0,
+    },
     {
         title: '',
         description: 'Переведите взгляд по диагонали слева направо',
@@ -52,6 +70,12 @@ export const ex3 = [
 export const ex4 = [
     {
         title: '',
+        description: 'Готовы?',
+        duration: 3,
+        sleepAfter: 0,
+    },
+    {
+        title: '',
         description: 'Поочерёдно водите глазами вверх и вниз 7-10 раз',
         duration: 0,
         sleepAfter: 0,
@@ -65,6 +89,12 @@ export const ex4 = [
 ];
 
 export const ex5 = [
+    {
+        title: '',
+        description: 'Скоро начнём!',
+        duration: 3,
+        sleepAfter: 0,
+    },
     {
         title: '',
         description:
@@ -95,6 +125,12 @@ export const ex5 = [
 export const ex6 = [
     {
         title: '',
+        description: 'Готовьтесь.',
+        duration: 3,
+        sleepAfter: 0,
+    },
+    {
+        title: '',
         description: 'Нарисуйте в воздухе воображаемый зигзаг',
         duration: 7,
         sleepAfter: 0,
@@ -114,6 +150,12 @@ export const ex6 = [
 ];
 
 export const ex7 = [
+    {
+        title: '',
+        description: 'Уже начинаем!',
+        duration: 3,
+        sleepAfter: 0,
+    },
     {
         title: '',
         description:
