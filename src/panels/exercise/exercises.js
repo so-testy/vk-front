@@ -35,7 +35,7 @@ export const ex2 = [
         audio: 'arrows-1.mp3',
     },
     {
-        image: 'arrows.jpg',
+        image: 'blinking.jpg',
         title: '',
         description: 'А теперь необходимо быстро поморгать в течение 10 сек',
         duration: 10,
@@ -76,7 +76,7 @@ export const ex3 = [
         audio: 'diagonals-3.mp3',
     },
     {
-        image: 'diagonals.jpg',
+        image: 'blinking.jpg',
         title: '',
         description: 'А теперь быстро начните моргать в течение 15 секунд',
         duration: 15,
@@ -101,7 +101,7 @@ export const ex4 = [
         audio: 'vertical-1.mp3',
     },
     {
-        image: 'vertical.jpg',
+        image: 'blinking.jpg',
         title: '',
         description: 'А теперь быстро начните моргать в течение 15 сек',
         duration: 15,
@@ -143,7 +143,7 @@ export const ex5 = [
         audio: 'rectangle-3.mp3',
     },
     {
-        image: 'rectangle.jpg',
+        image: 'blinking.jpg',
         title: '',
         description: 'А теперь быстро поморгайте в течение 15 сек',
         duration: 15,
@@ -176,7 +176,7 @@ export const ex6 = [
         audio: 'zigzags-2.mp3',
     },
     {
-        image: 'zigzags.jpg',
+        image: 'blinking.jpg',
         title: '',
         description: 'А теперь быстро поморгайте в течение 15 сек',
         duration: 15,
@@ -218,7 +218,7 @@ export const ex7 = [
         audio: 'numbers-3.mp3',
     },
     {
-        image: 'numbers.jpg',
+        image: 'blinking.jpg',
         title: '',
         description: 'Быстро моргайте',
         duration: 15,
