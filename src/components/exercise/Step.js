@@ -4,13 +4,18 @@ import Timer, { useTimer } from 'react-compound-timer/build';
 import Sleep from './Sleep';
 
 const Step = ({
-    exercise: { title, description, duration, sleepAfter },
+    exercise: { image, audio, title, description, duration, sleepAfter },
     nextStep,
 }) => {
     const [isSleeping, setSleeping] = useState(false);
 
     const totalDuration = duration + sleepAfter;
     const isNeedForWait = duration === 0;
+
+    useEffect(() => {
+        let exAudio = new Audio(`/exercises/audios/${audio}`)
+        exAudio.play();
+    }, []);
 
     return (
         <>
@@ -35,85 +40,89 @@ const Step = ({
                     isSleeping ? (
                         <Sleep duration={sleepAfter} />
                     ) : (
-                        <>
-                            <Div
-                                style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    bottom: 0,
-                                    right: 0,
-                                    left: 0,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <Title
-                                    level={3}
+                            <>
+                                <Div
                                     style={{
-                                        textAlign: 'center',
-                                        marginBottom: 8,
+                                        position: 'absolute',
+                                        top: 0,
+                                        bottom: 0,
+                                        right: 0,
+                                        left: 0,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        justifyContent: 'center',
                                     }}
                                 >
-                                    {description}
-                                </Title>
+                                    <img src={`/exercises/images/${image}`} style={{
+                                        marginBottom: 20
+                                    }}></img>
 
-                                {!isNeedForWait && (
                                     <Title
-                                        level={1}
+                                        level={3}
                                         style={{
                                             textAlign: 'center',
-                                            fontSize: 30,
+                                            marginBottom: 8,
                                         }}
                                     >
-                                        <Timer
-                                            initialTime={duration * 1000}
-                                            direction="backward"
+                                        {description}
+                                    </Title>
+
+                                    {!isNeedForWait && (
+                                        <Title
+                                            level={1}
+                                            style={{
+                                                textAlign: 'center',
+                                                fontSize: 30,
+                                            }}
                                         >
-                                            <Timer.Minutes
-                                                formatValue={value =>
-                                                    String(value).padStart(
-                                                        2,
-                                                        '0',
-                                                    )
-                                                }
-                                            />
+                                            <Timer
+                                                initialTime={duration * 1000}
+                                                direction="backward"
+                                            >
+                                                <Timer.Minutes
+                                                    formatValue={value =>
+                                                        String(value).padStart(
+                                                            2,
+                                                            '0',
+                                                        )
+                                                    }
+                                                />
                                             :
                                             <Timer.Seconds
-                                                formatValue={value =>
-                                                    String(value).padStart(
-                                                        2,
-                                                        '0',
-                                                    )
-                                                }
-                                            />
-                                        </Timer>
-                                    </Title>
-                                )}
-                            </Div>
+                                                    formatValue={value =>
+                                                        String(value).padStart(
+                                                            2,
+                                                            '0',
+                                                        )
+                                                    }
+                                                />
+                                            </Timer>
+                                        </Title>
+                                    )}
+                                </Div>
 
-                            {isNeedForWait && (
-                                <FixedLayout vertical="bottom">
-                                    <Div>
-                                        <Button
-                                            onClick={() => {
-                                                if (sleepAfter > 0) {
-                                                    start();
+                                {isNeedForWait && (
+                                    <FixedLayout vertical="bottom">
+                                        <Div>
+                                            <Button
+                                                onClick={() => {
+                                                    if (sleepAfter > 0) {
+                                                        start();
 
-                                                    return true;
-                                                }
+                                                        return true;
+                                                    }
 
-                                                nextStep();
-                                            }}
-                                            size="xl"
-                                        >
-                                            Готово
+                                                    nextStep();
+                                                }}
+                                                size="xl"
+                                            >
+                                                Готово
                                         </Button>
-                                    </Div>
-                                </FixedLayout>
-                            )}
-                        </>
-                    )
+                                        </Div>
+                                    </FixedLayout>
+                                )}
+                            </>
+                        )
                 }
             </Timer>
         </>
