@@ -10,7 +10,7 @@ export const ex1 = [
         title: '',
         description: 'Быстро моргайте',
         description: 'Необходимо быстро моргать в течение полуминуты',
-        duration: 30,
+        duration: 30000,
         sleepAfter: 10,
         audio: 'blinking-1.mp3',
     },
@@ -18,13 +18,13 @@ export const ex1 = [
 
 export const ex2 = [
     {
-        image: 'arrows.jpg',
         title: '',
         description: 'Приготовьтесь.',
         duration: 3,
         sleepAfter: 0,
     },
     {
+        image: 'arrows.jpg',
         title: '',
         description: 'Поочерёдно водите глазами вправо и влево',
         duration: 60,

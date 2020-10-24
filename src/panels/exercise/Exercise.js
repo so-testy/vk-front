@@ -7,8 +7,6 @@ import { PanelHeaderBack, Snackbar, Avatar } from '@vkontakte/vkui';
 import useNavigation from '../../hooks/useNavigation';
 import Step from '../../components/exercise/Step';
 import Steps from '../../components/exercise/Steps';
-import { ex1, ex2, ex3, ex4, ex5, ex6, ex7 } from './exercises';
-import { Icon16Done } from '@vkontakte/icons';
 
 const Exercise = ({ id, exercise }) => {
     const [exerciseStructure, setExerciseStructure] = useState(exercise.steps);

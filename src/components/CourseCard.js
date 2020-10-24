@@ -11,9 +11,6 @@ const styles = {
         opacity: 0.5,
         pointerEvents: 'none',
     },
-    card: {
-        boxShadow: '0 2px 24px 0 rgba(0,0,0,.04), 0 0 2px 0 rgba(0,0,0,.04)',
-    },
 };
 
 const CourseCard = ({ course, setCourse, isButtonVisible = true }) => {
@@ -33,8 +30,8 @@ const CourseCard = ({ course, setCourse, isButtonVisible = true }) => {
                         position: 'absolute',
                         zIndex: -1,
                         height: '100%',
-                        background: `rgba(0, 0, 0, 0.1) url("${course.imageUrl}") no-repeat`,
-                        backgroundPositionX: '150%',
+                        background: `rgba(0, 0, 0, 0.1) url("/assets/${course.imageUrl}") no-repeat`,
+                        backgroundPositionX: '130%',
                         backgroundPositionY: -100,
                         borderRadius: 'inherit',
                         opacity: 0.2,

@@ -118,7 +118,10 @@ const Courses = ({ id, course, setExercise }) => {
 
     return (
         <Panel id={id}>
-            <PanelHeader left={<PanelHeaderBack onClick={goToCourses} />}>
+            <PanelHeader
+                left={<PanelHeaderBack onClick={goToCourses} />}
+                right={<PanelHeaderBack onClick={goToCourses} />}
+            >
                 {course.title}
             </PanelHeader>
             {routeProps.isExerciseFinished && (
@@ -137,9 +140,6 @@ const Courses = ({ id, course, setExercise }) => {
                     Задание успешно выполнено
                 </Snackbar>
             )}
-            <Group separator="hide">
-                <Div>Какая-нибудь статистика</Div>
-            </Group>
             <Group
                 separator="hide"
                 style={{
@@ -168,8 +168,8 @@ const Courses = ({ id, course, setExercise }) => {
                                 mode="shadow"
                                 key={exercise.id}
                                 style={{
-                                    boxShadow:
-                                        '0 2px 24px 0 rgba(0,0,0,.04), 0 0 2px 0 rgba(0,0,0,.04)',
+                                    // boxShadow:
+                                    //     '0 2px 24px 0 rgba(0,0,0,.04), 0 0 2px 0 rgba(0,0,0,.04)',
                                     marginTop: 12,
                                 }}
                                 onClick={() => {
@@ -195,13 +195,13 @@ const Courses = ({ id, course, setExercise }) => {
                                             }}
                                         >
                                             {exercise.name}
-                                            {exercise.isDone && (
+                                            {/* {exercise.isDone && (
                                                 <Icon20CheckCircleFillGreen
                                                     height={16}
                                                     width={16}
                                                     style={{ marginLeft: 6 }}
                                                 />
-                                            )}
+                                            )} */}
                                         </span>
                                         <Text
                                             weight="regular"

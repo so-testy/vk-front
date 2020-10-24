@@ -2,96 +2,103 @@ import React, { useEffect, useState, useRef } from 'react';
 import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
-import { Title, Div } from '@vkontakte/vkui';
+import {
+    Title,
+    Div,
+    Spinner,
+    PanelSpinner,
+    FixedLayout,
+    Button,
+} from '@vkontakte/vkui';
+import Icon28SettingsOutline from '@vkontakte/icons/dist/28/settings_outline';
 
-import { getSpeechFromText } from '../api';
+// import { getSpeechFromText } from '../api';
 import CourseCard from '../components/CourseCard';
 import config from '../config';
 
-import Eye from '../assets/¥áãàá 15.svg';
-import Eye1 from '../assets/¥áãàá 8.svg';
-import Eye2 from '../assets/¥áãàá 18.svg';
+// import Eye from '../assets/¥áãàá 15.svg';
+// import Eye1 from '../assets/¥áãàá 8.svg';
+// import Eye2 from '../assets/¥áãàá 18.svg';
+import Axios from 'axios';
 
 export const PROGRESS_NONE = 'PROGRESS_NONE';
 export const PROGRESS_ENDING = 'PROGRESS_ENDING';
 
-const Courses = ({ id, setCourse }) => {
+function toArrayBuffer(buf) {
+    var ab = new ArrayBuffer(buf.length);
+    var view = new Uint8Array(ab);
+    for (var i = 0; i < buf.length; ++i) {
+        view[i] = buf[i];
+    }
+    return ab;
+}
+
+const Courses = ({ id, setCourse, openSettings }) => {
     const [courses, setCourses] = useState([]);
-    const [audio, setAudio] = useState([]);
-    const audioEl = useRef();
 
     useEffect(() => {
-        setCourses([
-            {
-                id: 1,
-                title: 'Гимнастика для глаз',
-                description: 'После длительной и напряженной зрительной работы',
-                imageUrl: Eye,
-                startDate: new Date(),
-                progress: {
-                    type: PROGRESS_NONE,
-                },
-                duration: 8,
-                isDisabled: false,
+        Axios.get('https://1ed71614fb37.ngrok.io/api/courses', {
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
             },
-            {
-                id: 2,
-                title: 'Профилактика близорукости',
-                description:
-                    'Интеративная гимнастика для глаз по методу Аветисова',
-                imageUrl: Eye1,
-                startDate: null,
-                progress: {
-                    type: PROGRESS_ENDING,
-                    daysDone: 11,
-                },
-                duration: 30,
-                isDisabled: true,
-            },
-            {
-                id: 3,
-                title: 'Профилактика косоглазия',
-                description:
-                    'Интерактивная гимнастика для глаз по методу Аветисова',
-                imageUrl: Eye2,
-                startDate: null,
-                progress: {
-                    type: PROGRESS_ENDING,
-                    daysDone: 0,
-                },
-                duration: 15,
-                isDisabled: true,
-            },
-        ]);
-
-        // getSpeechFromText('hello').then(data => {
-        // })
+        }).then(({ data }) => {
+            console.log(data);
+            setCourses(
+                data.data.map(item => ({
+                    id: item.id,
+                    title: item.name,
+                    description: item.description,
+                    imageUrl: item.image,
+                    startDate: item.start_date,
+                    progress: JSON.parse(item.progress),
+                    duration: item.duration,
+                    isDisabled: item.is_blocked,
+                })),
+            );
+        });
     }, []);
+
+    console.log(courses);
 
     return (
         <Panel id={id}>
             <PanelHeader>{config.appName}</PanelHeader>
-            <Group separator="hide">
-                <Div style={{ paddingBottom: 0 }}>
-                    <Title
-                        level="2"
-                        weight="medium"
-                        style={{ marginBottom: 16 }}
-                    >
+            <Group separator="hide" style={{ marginBottom: 16 }}>
+                <Div
+                    style={{
+                        paddingTop: 0,
+                        paddingBottom: 8,
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Title level="2" weight="medium">
                         Все курсы
                     </Title>
+                    <Button
+                        mode="tertiary"
+                        style={{ padding: '0 0px', margin: 0, height: 'auto' }}
+                        onClick={openSettings}
+                    >
+                        <Icon28SettingsOutline />
+                    </Button>
                 </Div>
-                {courses.map(course => {
-                    return (
-                        <CourseCard
-                            course={course}
-                            setCourse={setCourse}
-                            key={course.id}
-                        />
-                    );
-                })}
+                {courses.length === 0 ? (
+                    <PanelSpinner size="medium" />
+                ) : (
+                    courses.map(course => {
+                        return (
+                            <CourseCard
+                                course={course}
+                                setCourse={setCourse}
+                                key={course.id}
+                            />
+                        );
+                    })
+                )}
             </Group>
-            <audio ref={audioEl} src={audio}></audio>
         </Panel>
     );
 };
