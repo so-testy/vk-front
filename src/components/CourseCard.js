@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import Button from '@vkontakte/vkui/dist/components/Button/Button';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';

@@ -10,7 +10,7 @@ export const ex1 = [
         title: '',
         description: 'Быстро моргайте',
         description: 'Необходимо быстро моргать в течение полуминуты',
-        duration: 30000,
+        duration: 30,
         sleepAfter: 10,
         audio: 'blinking-1.mp3',
     },
@@ -37,7 +37,7 @@ export const ex2 = [
     {
         image: 'arrows.jpg',
         title: '',
-        description: 'А теперь необходимо быстро поморгать в течении 10 сек',
+        description: 'А теперь необходимо быстро поморгать в течение 10 сек',
         duration: 10,
         sleepAfter: 20,
         audio: 'arrows-2.mp3',
@@ -46,13 +46,13 @@ export const ex2 = [
 
 export const ex3 = [
     {
-        image: 'diagonals.jpg',
         title: '',
         description: 'Начинаем...',
         duration: 3,
         sleepAfter: 0,
     },
     {
+        image: 'diagonals.jpg',
         title: '',
         description: 'Переведите взгляд по диагонали слева направо',
         duration: 5,
@@ -78,7 +78,7 @@ export const ex3 = [
     {
         image: 'diagonals.jpg',
         title: '',
-        description: 'А теперь быстро начните моргать в течении 15 секунд',
+        description: 'А теперь быстро начните моргать в течение 15 секунд',
         duration: 15,
         sleepAfter: 0,
         audio: 'diagonals-4.mp3',
@@ -87,13 +87,13 @@ export const ex3 = [
 
 export const ex4 = [
     {
-        image: 'vertical.jpg',
         title: '',
         description: 'Готовы?',
         duration: 3,
         sleepAfter: 0,
     },
     {
+        image: 'vertical.jpg',
         title: '',
         description: 'Поочерёдно водите глазами вверх и вниз 7-10 раз',
         duration: 0,
@@ -103,7 +103,7 @@ export const ex4 = [
     {
         image: 'vertical.jpg',
         title: '',
-        description: 'А теперь быстро начните моргать в течении 15 сек',
+        description: 'А теперь быстро начните моргать в течение 15 сек',
         duration: 15,
         sleepAfter: 0,
         audio: 'vertical-2.mp3',
@@ -112,13 +112,13 @@ export const ex4 = [
 
 export const ex5 = [
     {
-        image: 'rectangle.jpg',
         title: '',
         description: 'Скоро начнём!',
         duration: 3,
         sleepAfter: 0,
     },
     {
+        image: 'rectangle.jpg',
         title: '',
         description:
             'Нарисуйте в воздухе воображаемый прямоугольник, начиная с левого нижнего угла',
@@ -145,7 +145,7 @@ export const ex5 = [
     {
         image: 'rectangle.jpg',
         title: '',
-        description: 'А теперь быстро поморгайте в течении 15 сек',
+        description: 'А теперь быстро поморгайте в течение 15 сек',
         duration: 15,
         sleepAfter: 0,
         audio: 'rectangle-4.mp3',
@@ -154,13 +154,13 @@ export const ex5 = [
 
 export const ex6 = [
     {
-        image: 'zigzags.jpg',
         title: '',
         description: 'Готовьтесь.',
         duration: 3,
         sleepAfter: 0,
     },
     {
+        image: 'zigzags.jpg',
         title: '',
         description: 'Нарисуйте в воздухе воображаемый зигзаг',
         duration: 7,
@@ -178,7 +178,7 @@ export const ex6 = [
     {
         image: 'zigzags.jpg',
         title: '',
-        description: 'А теперь быстро поморгайте в течении 15 сек',
+        description: 'А теперь быстро поморгайте в течение 15 сек',
         duration: 15,
         sleepAfter: 0,
         audio: 'zigzags-3.mp3',
@@ -187,13 +187,13 @@ export const ex6 = [
 
 export const ex7 = [
     {
-        image: 'numbers.jpg',
         title: '',
         description: 'Уже начинаем!',
         duration: 3,
         sleepAfter: 0,
     },
     {
+        image: 'numbers.jpg',
         title: '',
         description:
             'Двигайте глазами по часовой стрелке, останавливая свой взгляд на 3, 6, 9 и 12 часах',

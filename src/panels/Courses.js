@@ -1,65 +1,63 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
-import {
-    Title,
-    Div,
-    Spinner,
-    PanelSpinner,
-    FixedLayout,
-    Button,
-} from '@vkontakte/vkui';
+import { Title, Div, PanelSpinner, Button } from '@vkontakte/vkui';
 import Icon28SettingsOutline from '@vkontakte/icons/dist/28/settings_outline';
 
-// import { getSpeechFromText } from '../api';
 import CourseCard from '../components/CourseCard';
 import config from '../config';
 
-// import Eye from '../assets/¥áãàá 15.svg';
-// import Eye1 from '../assets/¥áãàá 8.svg';
-// import Eye2 from '../assets/¥áãàá 18.svg';
-import Axios from 'axios';
-
 export const PROGRESS_NONE = 'PROGRESS_NONE';
 export const PROGRESS_ENDING = 'PROGRESS_ENDING';
-
-function toArrayBuffer(buf) {
-    var ab = new ArrayBuffer(buf.length);
-    var view = new Uint8Array(ab);
-    for (var i = 0; i < buf.length; ++i) {
-        view[i] = buf[i];
-    }
-    return ab;
-}
 
 const Courses = ({ id, setCourse, openSettings }) => {
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {
-        Axios.get('https://1ed71614fb37.ngrok.io/api/courses', {
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest',
+        setCourses([
+            {
+                id: 1,
+                title: 'Гимнастика для глаз',
+                description: 'После длительной и напряженной зрительной работы',
+                imageUrl: '15.svg',
+                startDate: new Date(),
+                progress: {
+                    type: PROGRESS_NONE,
+                },
+                duration: 8,
+                isDisabled: false,
             },
-        }).then(({ data }) => {
-            console.log(data);
-            setCourses(
-                data.data.map(item => ({
-                    id: item.id,
-                    title: item.name,
-                    description: item.description,
-                    imageUrl: item.image,
-                    startDate: item.start_date,
-                    progress: JSON.parse(item.progress),
-                    duration: item.duration,
-                    isDisabled: item.is_blocked,
-                })),
-            );
-        });
+            {
+                id: 2,
+                title: 'Профилактика близорукости',
+                description:
+                    'Интеративная гимнастика для глаз по методу Аветисова',
+                imageUrl: '8.svg',
+                startDate: null,
+                progress: {
+                    type: PROGRESS_ENDING,
+                    daysDone: 11,
+                },
+                duration: 30,
+                isDisabled: true,
+            },
+            {
+                id: 3,
+                title: 'Профилактика косоглазия',
+                description:
+                    'Интерактивная гимнастика для глаз по методу Аветисова',
+                imageUrl: '18.svg',
+                startDate: null,
+                progress: {
+                    type: PROGRESS_ENDING,
+                    daysDone: 0,
+                },
+                duration: 15,
+                isDisabled: true,
+            },
+        ]);
     }, []);
-
-    console.log(courses);
 
     return (
         <Panel id={id}>
