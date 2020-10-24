@@ -11,15 +11,18 @@ import Course from './panels/Course';
 import NavigationContext from './NavigationContext';
 
 import useNavigation from './hooks/useNavigation';
+import Exercise from './panels/exercise/Exercise';
 
 const App = () => {
     const [activePanel, setActivePanel] = useState('courses');
     const [activeView, setActiveView] = useState('courses');
     const [activeModal, setActiveModal] = useState(null);
+    const [routeProps, setRouteProps] = useState({});
     // const [fetchedUser, setUser] = useState(null);
     // const [popout, setPopout] = useState(<ScreenSpinner size="large" />);
 
     const [course, setCourse] = useState(null);
+    const [exercise, setExercise] = useState(null);
 
     // useEffect(() => {
     // 	bridge.subscribe(({ detail: { type, data }}) => {
@@ -76,11 +79,13 @@ const App = () => {
                 activeView,
                 activePanel,
                 activeModal,
-                updateRoute: ({ view, panel, modal }) => {
+                updateRoute: ({ view, panel, modal, props }) => {
                     setActivePanel(panel || activePanel);
                     setActiveView(view || activeView);
                     setActiveModal(modal || activeModal);
+                    setRouteProps(props || {});
                 },
+                routeProps,
             }}
         >
             <Root activeView={activeView}>
@@ -92,7 +97,15 @@ const App = () => {
                             setActivePanel('course');
                         }}
                     />
-                    <Course id="course" course={course} />
+                    <Course
+                        id="course"
+                        course={course}
+                        setExercise={exercise => {
+                            setExercise(exercise);
+                            setActivePanel('exercise');
+                        }}
+                    />
+                    <Exercise id="exercise" exercise={exercise} />
                 </View>
             </Root>
         </NavigationContext.Provider>

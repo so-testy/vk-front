@@ -4,7 +4,7 @@ import NavigationContext from '../NavigationContext';
 const useNavigation = route => {
     const { updateRoute } = useContext(NavigationContext);
 
-    return () => updateRoute(route);
+    return props => updateRoute({ ...route, props });
 };
 
 export default useNavigation;

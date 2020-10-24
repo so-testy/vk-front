@@ -28,7 +28,7 @@ const Courses = ({ id, setCourse }) => {
                 progress: {
                     type: PROGRESS_NONE,
                 },
-                duration: 10,
+                duration: 8,
                 isDisabled: false,
             },
             {

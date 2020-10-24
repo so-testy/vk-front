@@ -5,6 +5,7 @@ const NavigationContext = React.createContext({
     activePanel: null,
     activeModal: null,
     updateRoute: () => {},
+    routeProps: {},
 });
 
 export default NavigationContext;
