@@ -4,13 +4,18 @@ import Timer, { useTimer } from 'react-compound-timer/build';
 import Sleep from './Sleep';
 
 const Step = ({
-    exercise: { image, title, description, duration, sleepAfter },
+    exercise: { image, audio, title, description, duration, sleepAfter },
     nextStep,
 }) => {
     const [isSleeping, setSleeping] = useState(false);
 
     const totalDuration = duration + sleepAfter;
     const isNeedForWait = duration === 0;
+
+    useEffect(() => {
+        let exAudio = new Audio(`/exercises/audios/${audio}`)
+        exAudio.play();
+    }, []);
 
     return (
         <>
@@ -48,7 +53,7 @@ const Step = ({
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    <img src={`/exercises/${image}`} style={{
+                                    <img src={`/exercises/images/${image}`} style={{
                                         marginBottom: 20
                                     }}></img>
 
