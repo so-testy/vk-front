@@ -41,6 +41,15 @@ const Courses = ({ id, course, setExercise }) => {
     useEffect(() => {
         setExercises([
             {
+                id: 3,
+                name: 'Диагонали',
+                description:
+                    'Попеременно нужно переводить взгляд по диагонали. Для этого хорошо подходит окно.',
+                isDone: true,
+                duration: 85,
+                steps: ex3,
+            },
+            {
                 id: 1,
                 name: 'Моргание',
                 description:
@@ -57,15 +66,6 @@ const Courses = ({ id, course, setExercise }) => {
                 isDone: true,
                 duration: 70,
                 steps: ex2,
-            },
-            {
-                id: 3,
-                name: 'Диагонали',
-                description:
-                    'Попеременно нужно переводить взгляд по диагонали. Для этого хорошо подходит окно.',
-                isDone: true,
-                duration: 85,
-                steps: ex3,
             },
             {
                 id: 4,
