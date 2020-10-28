@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react'; 
 import bridge from '@vkontakte/vk-bridge';
 import View from '@vkontakte/vkui/dist/components/View/View';
-import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
 import {
     Root,
     ModalRoot,
@@ -12,6 +11,8 @@ import {
     TabbarItem,
     Switch,
     Cell,
+    Panel,
+    PanelHeader,
     PanelHeaderButton,
     ModalPage,
     ModalPageHeader,
@@ -25,7 +26,6 @@ import {
     ActionSheetItem,
     CellButton,
 } from '@vkontakte/vkui';
-import Icon56InfoOutline from '@vkontakte/icons/dist/56/info_outline';
 import '@vkontakte/vkui/dist/vkui.css';
 
 import Courses, { PROGRESS_NONE } from './panels/Courses';
@@ -38,10 +38,10 @@ import AuthContext from './AuthProvider';
 import {
     Icon24Cancel,
     Icon24Dismiss,
-    Icon28NewsfeedOutline,
-    Icon28ServicesOutline,
+    Icon28Ghost,
+    Icon28User,
 } from '@vkontakte/icons';
-import Icon28SettingsOutline from '@vkontakte/icons/dist/28/settings_outline';
+
 const App = () => {
     const [activePanel, setActivePanel] = useState('courses');
     const [activeView, setActiveView] = useState('courses');
@@ -110,21 +110,21 @@ const App = () => {
                                             <ActionSheetItem
                                                 autoclose
                                                 onClick={() => setHours(2)}
-                                                // before={<Icon28Profile />}
+                                            // before={<Icon28Profile />}
                                             >
                                                 2 часа
                                             </ActionSheetItem>
                                             <ActionSheetItem
                                                 autoclose
                                                 onClick={() => setHours(3)}
-                                                // before={<Icon28CameraOutline />}
+                                            // before={<Icon28CameraOutline />}
                                             >
                                                 3 часа
                                             </ActionSheetItem>
                                             <ActionSheetItem
                                                 autoclose
                                                 onClick={() => setHours(4)}
-                                                // before={<Icon28CameraOutline />}
+                                            // before={<Icon28CameraOutline />}
                                             >
                                                 4 часа
                                             </ActionSheetItem>
@@ -159,7 +159,22 @@ const App = () => {
                     routeProps,
                 }}
             >
-                <Root activeView={activeView}>
+                <Epic activeStory={activeStory} tabbar={
+                    <Tabbar>
+                        <TabbarItem
+                            // onClick={this.onStoryChange}
+                            selected={activeStory === 'courses'}
+                            data-story="courses"
+                            text="Курсы"
+                        ><Icon28Ghost /></TabbarItem>
+                        <TabbarItem
+                            // onClick={this.onStoryChange}
+                            selected={activeStory === 'profile'}
+                            data-story="profile"
+                            text="Профиль"
+                        ><Icon28User /></TabbarItem>
+                    </Tabbar>
+                }>
                     <View
                         id="courses"
                         modal={modal}
@@ -184,7 +199,12 @@ const App = () => {
                         />
                         <Exercise id="exercise" exercise={exercise} />
                     </View>
-                </Root>
+                    <View id="profile" activePanel="profile">
+                        <Panel id="profile">
+                            <PanelHeader>Профиль</PanelHeader>
+                        </Panel>
+                    </View>
+                </Epic>
             </NavigationContext.Provider>
         </AuthContext.Provider>
     );
