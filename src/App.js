@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
+import { Provider } from 'mobx-react';
+
 import {
     Epic,
     Tabbar,
     View,
     TabbarItem,
 } from '@vkontakte/vkui';
-import '@vkontakte/vkui/dist/vkui.css';
-
-import Courses from './panels/Courses/index';
-import Course from './panels/Course/index';
-import Profile from './panels/Profile/index';
-
-import NavigationContext from './NavigationContext';
-
-import Exercise from './panels/Course/exercise/Exercise';
-import AuthContext from './AuthProvider';
 import {
     Icon28Ghost,
     Icon28User,
 } from '@vkontakte/icons';
+import '@vkontakte/vkui/dist/vkui.css';
+
+import userStore from './store/userStore';
+
+import NavigationContext from './NavigationContext';
+import AuthContext from './AuthProvider';
+
+import Courses from './panels/Courses/index';
+import Course from './panels/Course/index';
+import Profile from './panels/Profile/index';
+import Exercise from './panels/Course/exercise/Exercise';
 
 const App = () => {
 
@@ -34,7 +37,7 @@ const App = () => {
     const [exercise, setExercise] = useState(null);
 
     return (
-        <AuthContext.Provider value={{ user: fetchedUser }}>
+        <Provider userStore={userStore}>
             <NavigationContext.Provider
                 value={{
                     activeView,
@@ -94,7 +97,7 @@ const App = () => {
                     </View>
                 </Epic>
             </NavigationContext.Provider>
-        </AuthContext.Provider>
+        </Provider>
     );
 };
 
