@@ -1,9 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
-import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
-import Button from '@vkontakte/vkui/dist/components/Button/Button';
-import Group from '@vkontakte/vkui/dist/components/Group/Group';
-import Div from '@vkontakte/vkui/dist/components/Div/Div';
 import Icon20CheckCircleFillGreen from '@vkontakte/icons/dist/20/check_circle_fill_green';
 import {
     CardGrid,
@@ -14,6 +9,11 @@ import {
     FixedLayout,
     Snackbar,
     Avatar,
+    Panel,
+    PanelHeader,
+    Button,
+    Group, 
+    Div
 } from '@vkontakte/vkui';
 
 import useNavigation from '../../hooks/useNavigation';
@@ -62,7 +62,7 @@ const Courses = ({ id, course, setExercise }) => {
             {routeProps.isExerciseFinished && (
                 <Snackbar
                     layout="vertical"
-                    onClose={() => {}}
+                    onClose={() => { }}
                     before={
                         <Avatar size={24}>
                             <Icon20CheckCircleFillGreen

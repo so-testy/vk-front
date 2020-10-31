@@ -5,8 +5,8 @@ import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader
 import { PanelHeaderBack } from '@vkontakte/vkui';
 
 import useNavigation from '../../../hooks/useNavigation';
-import Step from '../../../components/exercise/Step';
-import Steps from '../../../components/exercise/Steps';
+import Step from '../../../components/CourseExercise/exercise/Step';
+import Steps from '../../../components/CourseExercise/exercise/Steps';
 
 const Exercise = ({ id, exercise }) => {
     const [exerciseStructure] = useState(exercise.steps);

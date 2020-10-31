@@ -6,7 +6,7 @@ import Group from '@vkontakte/vkui/dist/components/Group/Group';
 import { Title, Div, PanelSpinner, Button } from '@vkontakte/vkui';
 import Icon28SettingsOutline from '@vkontakte/icons/dist/28/settings_outline';
 
-import CourseCard from '../../components/CourseCard';
+import CourseCard from '../../components/CourseCard/index';
 import config from '../../config';
 
 import mockCourses from './mockCourses';
