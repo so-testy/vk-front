@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 import Button from '@vkontakte/vkui/dist/components/Button/Button';
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
-
+import Icon20CheckCircleFillGreen from '@vkontakte/icons/dist/20/check_circle_fill_green';
 import {
     CardGrid,
     Card,
@@ -16,13 +15,11 @@ import {
     Snackbar,
     Avatar,
 } from '@vkontakte/vkui';
-import { Icon16Done } from '@vkontakte/icons';
 
-import useNavigation from '../hooks/useNavigation';
+import useNavigation from '../../hooks/useNavigation';
+import NavigationContext from '../../NavigationContext';
 
-import Icon20CheckCircleFillGreen from '@vkontakte/icons/dist/20/check_circle_fill_green';
-import { ex1, ex2, ex3, ex4, ex5, ex6, ex7 } from './exercise/exercises';
-import NavigationContext from '../NavigationContext';
+import mockCourse from './mockCourse';
 
 const getDuration = duration => {
     const minutes = Math.floor(duration / 60);
@@ -34,75 +31,16 @@ const getDuration = duration => {
     };
 };
 
+// Страница списка упражнений
+
+// TODO: Вынести непосредственную тренировку в отдельный компонент CourseExercise
+
 const Courses = ({ id, course, setExercise }) => {
     const [exercises, setExercises] = useState([]);
     const [isExerciseFinished, setIsExerciseFinished] = useState(false);
 
     useEffect(() => {
-        setExercises([
-            {
-                id: 3,
-                name: 'Диагонали',
-                description:
-                    'Попеременно нужно переводить взгляд по диагонали. Для этого хорошо подходит окно.',
-                isDone: true,
-                duration: 85,
-                steps: ex3,
-            },
-            {
-                id: 1,
-                name: 'Моргание',
-                description:
-                    'Моргать нужно быстро, не напрягая глаз в течение полминуты.',
-                isDone: true,
-                duration: 40,
-                steps: ex1,
-            },
-            {
-                id: 2,
-                name: 'Стрелки',
-                description:
-                    'Глазами нужно водить поочередно вправо и влево, в течение одной минуты, потом поморгать 10 секунд.',
-                isDone: true,
-                duration: 70,
-                steps: ex2,
-            },
-            {
-                id: 4,
-                name: 'Вертикаль',
-                description:
-                    'Как понятно из названия, движения глаз направлены вверх и вниз.',
-                isDone: true,
-                duration: 75,
-                steps: ex4,
-            },
-            {
-                id: 5,
-                name: 'Прямоугольник',
-                description:
-                    'Нужно нарисовать в воздухе воображаемый квадрат или прямоугольник.',
-                isDone: true,
-                duration: 75,
-                steps: ex5,
-            },
-            {
-                id: 6,
-                name: 'Зигзаги',
-                description: 'Нужно нарисовать в воздухе воображаемый зигзаг.',
-                isDone: true,
-                duration: 75,
-                steps: ex6,
-            },
-            {
-                id: 7,
-                name: 'Цифры',
-                description:
-                    'Во время этого упражнения глазами двигают как часовой стрелкой, останавливая свой взгляд на 3, 6, 9 и 12 часах.',
-                isDone: true,
-                duration: 75,
-                steps: ex7,
-            },
-        ]);
+        setExercises(mockCourse);
     }, []);
 
     const isWasStarted =

@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Timer from 'react-compound-timer/build';
-import { Button, Div, FixedLayout, Title } from '@vkontakte/vkui';
+import { Div, Title } from '@vkontakte/vkui';
 
 const Sleep = ({ duration }) => {
     return (

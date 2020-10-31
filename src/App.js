@@ -1,25 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react'; 
-import bridge from '@vkontakte/vk-bridge';
+import React, { useState } from 'react';
 import View from '@vkontakte/vkui/dist/components/View/View';
 import {
-    Root,
     ModalRoot,
-    ModalCard,
-    Text,
     Epic,
     Tabbar,
     TabbarItem,
-    Switch,
-    Cell,
-    Panel,
-    PanelHeader,
     PanelHeaderButton,
     ModalPage,
     ModalPageHeader,
     IS_PLATFORM_ANDROID,
     IS_PLATFORM_IOS,
     FormLayoutGroup,
-    Input,
     FormLayout,
     Checkbox,
     ActionSheet,
@@ -28,12 +19,13 @@ import {
 } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 
-import Courses, { PROGRESS_NONE } from './panels/Courses';
-import Course from './panels/Course';
+import Courses from './panels/Courses/index';
+import Course from './panels/Course/index';
+import Profile from './panels/Profile/index';
+
 import NavigationContext from './NavigationContext';
 
-import useNavigation from './hooks/useNavigation';
-import Exercise from './panels/exercise/Exercise';
+import Exercise from './panels/Course/exercise/Exercise';
 import AuthContext from './AuthProvider';
 import {
     Icon24Cancel,
@@ -43,6 +35,8 @@ import {
 } from '@vkontakte/icons';
 
 const App = () => {
+
+    // TODO: вынести навигацию в глобальный стор
     const [activePanel, setActivePanel] = useState('courses');
     const [activeView, setActiveView] = useState('courses');
     const [activeModal, setActiveModal] = useState(null);
@@ -162,13 +156,13 @@ const App = () => {
                 <Epic activeStory={activeStory} tabbar={
                     <Tabbar>
                         <TabbarItem
-                            // onClick={this.onStoryChange}
+                            onClick={() => setActiveStory('courses')}
                             selected={activeStory === 'courses'}
                             data-story="courses"
                             text="Курсы"
                         ><Icon28Ghost /></TabbarItem>
                         <TabbarItem
-                            // onClick={this.onStoryChange}
+                            onClick={() => setActiveStory('profile')}
                             selected={activeStory === 'profile'}
                             data-story="profile"
                             text="Профиль"
@@ -200,9 +194,7 @@ const App = () => {
                         <Exercise id="exercise" exercise={exercise} />
                     </View>
                     <View id="profile" activePanel="profile">
-                        <Panel id="profile">
-                            <PanelHeader>Профиль</PanelHeader>
-                        </Panel>
+                        <Profile id="profile" />
                     </View>
                 </Epic>
             </NavigationContext.Provider>

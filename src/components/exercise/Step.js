@@ -1,6 +1,6 @@
 import { Button, Div, FixedLayout, Title } from '@vkontakte/vkui';
 import React, { useEffect, useState } from 'react';
-import Timer, { useTimer } from 'react-compound-timer/build';
+import Timer from 'react-compound-timer/build';
 import Sleep from './Sleep';
 
 const Step = ({

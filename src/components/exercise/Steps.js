@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const Steps = ({ children, activeStep }) => {
     const step = React.Children.toArray(children).find(

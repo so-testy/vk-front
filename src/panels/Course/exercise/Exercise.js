@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import Sleep from '../../components/exercise/Sleep';
+import React, { useState } from 'react';
 import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 
-import { PanelHeaderBack, Snackbar, Avatar } from '@vkontakte/vkui';
-import useNavigation from '../../hooks/useNavigation';
-import Step from '../../components/exercise/Step';
-import Steps from '../../components/exercise/Steps';
+import { PanelHeaderBack } from '@vkontakte/vkui';
+
+import useNavigation from '../../../hooks/useNavigation';
+import Step from '../../../components/exercise/Step';
+import Steps from '../../../components/exercise/Steps';
 
 const Exercise = ({ id, exercise }) => {
-    const [exerciseStructure, setExerciseStructure] = useState(exercise.steps);
+    const [exerciseStructure] = useState(exercise.steps);
     const [step, setStep] = useState(0);
 
     const goToCourse = useNavigation({ view: 'courses', panel: 'course' });
-
-    // useEffect(() => {
-    //     setExerciseStructure(exercise.steps);
-    // }, []);
 
     const nextStep = () => {
         if (step < exerciseStructure.length - 1) return setStep(step + 1);
