@@ -1,15 +1,20 @@
-import { observable} from 'mobx';
+import { observable, makeObservable } from 'mobx';
 
 class UserStore {
-  @observable user;
-  @observable isAuthorized;
+  user;
+  isAuthorized;
 
   constructor() {
-    this.user = {};
+    makeObservable(this, {
+      user: observable,
+      isAuthorized: observable
+    });
+
+    this.user = {
+      name: "name"
+    };
     this.isAuthorized = false;
   }
 }
 
-const userStore = new UserStore();
-
-export default userStore;
+export default UserStore;

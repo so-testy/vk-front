@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { inject, observer } from 'mobx-react';
+
 import Icon20CheckCircleFillGreen from '@vkontakte/icons/dist/20/check_circle_fill_green';
 import {
     CardGrid,
@@ -16,7 +18,6 @@ import {
     Div
 } from '@vkontakte/vkui';
 
-import useNavigation from '../../hooks/useNavigation';
 import NavigationContext from '../../NavigationContext';
 
 import mockCourse from './mockCourse';
@@ -35,7 +36,7 @@ const getDuration = duration => {
 
 // TODO: Вынести непосредственную тренировку в отдельный компонент CourseExercise
 
-const Courses = ({ id, course, setExercise }) => {
+const Courses = ({ id, course, setExercise, navStore }) => {
     const [exercises, setExercises] = useState([]);
     const [isExerciseFinished, setIsExerciseFinished] = useState(false);
 
@@ -50,7 +51,10 @@ const Courses = ({ id, course, setExercise }) => {
         exercise => !exercise.isDone,
     );
 
-    const goToCourses = useNavigation({ view: 'courses', panel: 'courses' });
+    const goToCourses = () => {
+        navStore.setActiveView('courses');
+        navStore.setActivePanel('courses');
+    }    
 
     const { routeProps } = useContext(NavigationContext);
 
@@ -166,4 +170,4 @@ const Courses = ({ id, course, setExercise }) => {
     );
 };
 
-export default Courses;
+export default inject('navStore')(observer(Courses));
