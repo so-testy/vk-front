@@ -3,8 +3,8 @@ import UserStore from './userStore'
 
 export default {
     navStore: new NavStore({
-        view: 'courses',
-        panel: 'courses',
+        view: 'training',
+        panel: 'root',
         modal: null
     }),
     userStore: new UserStore()

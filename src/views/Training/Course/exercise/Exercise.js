@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 import { observer, inject } from "mobx-react";
-import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 
 import { PanelHeaderBack } from '@vkontakte/vkui';
 
-import Step from '../../../components/CourseExercise/exercise/Step';
-import Steps from '../../../components/CourseExercise/exercise/Steps';
+import Step from '../../../../components/CourseExercise/exercise/Step';
+import Steps from '../../../../components/CourseExercise/exercise/Steps';
 
-const Exercise = ({ navStore, id, exercise }) => {
+const Exercise = ({ navStore, exercise }) => {
     const [exerciseStructure] = useState(exercise.steps);
     const [step, setStep] = useState(0);
 
     const goToCourse = () => {
-        navStore.setActiveView('courses');
-        navStore.setActivePanel('course')
+        navStore.setActiveView("training", "course");
     }
 
     const nextStep = () => {
@@ -23,7 +21,7 @@ const Exercise = ({ navStore, id, exercise }) => {
     };
 
     return (
-        <Panel id={id}>
+        <>
             <PanelHeader left={<PanelHeaderBack onClick={goToCourse} />}>
                 {exercise.name}
             </PanelHeader>
@@ -41,7 +39,7 @@ const Exercise = ({ navStore, id, exercise }) => {
                     })}
                 </Steps>
             ) : null}
-        </Panel>
+        </>
     );
 };
 

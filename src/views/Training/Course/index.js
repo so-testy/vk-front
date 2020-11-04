@@ -11,15 +11,14 @@ import {
     FixedLayout,
     Snackbar,
     Avatar,
-    Panel,
     PanelHeader,
     Button,
-    Group, 
+    Group,
     Div
 } from '@vkontakte/vkui';
 
 // TODO: удалить
-import NavigationContext from '../../NavigationContext';
+import NavigationContext from '../../../NavigationContext';
 
 import mockCourse from './mockCourse';
 
@@ -35,11 +34,8 @@ const getDuration = duration => {
 
 // Страница списка упражнений
 
-// TODO: Вынести непосредственную тренировку в отдельный компонент CourseExercise
-
-const Courses = ({ id, course, setExercise, navStore }) => {
+const Courses = ({ course, setExercise, navStore }) => {
     const [exercises, setExercises] = useState([]);
-    const [isExerciseFinished, setIsExerciseFinished] = useState(false);
 
     useEffect(() => {
         setExercises(mockCourse);
@@ -52,16 +48,12 @@ const Courses = ({ id, course, setExercise, navStore }) => {
         exercise => !exercise.isDone,
     );
 
-    const goToCourses = () => {
-        navStore.setActiveView('courses');
-        navStore.setActivePanel('courses');
-    }    
-
     const { routeProps } = useContext(NavigationContext);
 
     return (
-        <Panel id={id}>
-            <PanelHeader left={<PanelHeaderBack onClick={goToCourses} />}>
+        <>
+            <PanelHeader
+                left={<PanelHeaderBack onClick={() => navStore.setActiveView("training", "root")} />}>
                 {course.title}
             </PanelHeader>
             {routeProps.isExerciseFinished && (
@@ -167,7 +159,7 @@ const Courses = ({ id, course, setExercise, navStore }) => {
                     </Div>
                 </FixedLayout>
             )}
-        </Panel>
+        </>
     );
 };
 

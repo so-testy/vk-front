@@ -10,7 +10,6 @@ class NavStore {
       activePanel: observable,
       activeView: observable,
       activeModal: observable,
-      setActivePanel: action,
       setActiveView: action,
       setActiveModal: action
     });
@@ -20,12 +19,9 @@ class NavStore {
     this.activeModal = modal;
   }
 
-  setActivePanel(panel) {
-    this.activePanel = panel;
-  }
-
-  setActiveView(view) {
-    this.activeView = view;
+  setActiveView(view, panel) {
+    this.activeView = view || this.activeView;
+    this.activePanel = panel || this.activePanel;
   }
 
   setActiveModal(modal) {

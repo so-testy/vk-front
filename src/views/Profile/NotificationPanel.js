@@ -6,11 +6,9 @@ import PanelHeader from "@vkontakte/vkui/dist/components/PanelHeader/PanelHeader
 
 // Страница настройки профиля
 
-const Profile = ({ id, userStore}) => {
+const Profile = ({ id, userStore }) => {
     return (
-        <Panel id={id}>
-            <PanelHeader>Профиль {userStore.user.name}</PanelHeader>
-        </Panel>
+        <PanelHeader>Профиль Notification {userStore.user.name}</PanelHeader>
     );
 };
 

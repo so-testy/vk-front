@@ -5,8 +5,8 @@ import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
 import { Title, Div, PanelSpinner } from '@vkontakte/vkui';
 
-import CourseCard from '../../components/CourseCard/index';
-import config from '../../config';
+import CourseCard from '../../../components/CourseCard/index';
+import config from '../../../config';
 
 import mockCourses from './mockCourses';
 
@@ -15,7 +15,7 @@ export const PROGRESS_ENDING = 'PROGRESS_ENDING';
 
 // Страница списка доступных курсов
 
-const Courses = ({ id, setCourse }) => {
+const Courses = ({ setCourse }) => {
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const Courses = ({ id, setCourse }) => {
     }, []);
 
     return (
-        <Panel id={id}>
+        <>
             <PanelHeader>{config.appName}</PanelHeader>
             <Group separator="hide" style={{ marginBottom: 16 }}>
                 <Div
@@ -56,7 +56,7 @@ const Courses = ({ id, setCourse }) => {
                         })
                     )}
             </Group>
-        </Panel>
+        </>
     );
 };
 

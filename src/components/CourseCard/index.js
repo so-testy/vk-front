@@ -4,7 +4,7 @@ import Button from '@vkontakte/vkui/dist/components/Button/Button';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
 
 import { CardGrid, Card, Title, Text } from '@vkontakte/vkui';
-import { PROGRESS_NONE } from '../../panels/Courses/index';
+import { PROGRESS_NONE } from '../../views/Training/Root/index';
 
 const styles = {
     disabledCard: {
