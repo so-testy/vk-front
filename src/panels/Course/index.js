@@ -18,6 +18,7 @@ import {
     Div
 } from '@vkontakte/vkui';
 
+// TODO: удалить
 import NavigationContext from '../../NavigationContext';
 
 import mockCourse from './mockCourse';
