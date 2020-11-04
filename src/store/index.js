@@ -3,7 +3,7 @@ import UserStore from './userStore'
 
 export default {
     navStore: new NavStore({
-        view: 'training',
+        view: 'profile',
         panel: 'root',
         modal: null
     }),

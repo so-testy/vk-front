@@ -19,7 +19,7 @@ const Step = ({
         return () => {
             exAudio.pause();
         };
-    }, []);
+    }, [audio]);
 
     return (
         <>

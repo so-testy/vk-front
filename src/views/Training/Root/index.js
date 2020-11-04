@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
 import { Title, Div, PanelSpinner } from '@vkontakte/vkui';
