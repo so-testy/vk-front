@@ -18,20 +18,20 @@ const App = ({ navStore }) => {
    
     return (
         <Epic
-            activeStory={navStore.activeStory}
+            activeStory={navStore.activeView}
             tabbar={
                 <Tabbar>
                     <TabbarItem
-                        onClick={() => navStore.setActiveStory("courses")}
-                        selected={navStore.activeStory === "courses"}
+                        onClick={() => navStore.setActiveView("courses")}
+                        selected={navStore.activeView === "courses"}
                         data-story="courses"
                         text="Курсы"
                     >
                         <Icon28Ghost />
                     </TabbarItem>
                     <TabbarItem
-                        onClick={() => navStore.setActiveStory("profile")}
-                        selected={navStore.activeStory === "profile"}
+                        onClick={() => navStore.setActiveView("profile")}
+                        selected={navStore.activeView === "profile"}
                         data-story="profile"
                         text="Профиль"
                     >
@@ -47,7 +47,6 @@ const App = ({ navStore }) => {
                         setCourse(course);
                         navStore.setActivePanel("course");
                     }}
-                    openSettings={() => navStore.setActiveModal("settings")}
                 />
                 <Course
                     id="course"

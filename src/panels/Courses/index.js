@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
-import { Title, Div, PanelSpinner, Button } from '@vkontakte/vkui';
-import Icon28SettingsOutline from '@vkontakte/icons/dist/28/settings_outline';
+import { Title, Div, PanelSpinner } from '@vkontakte/vkui';
 
 import CourseCard from '../../components/CourseCard/index';
 import config from '../../config';
@@ -16,7 +15,7 @@ export const PROGRESS_ENDING = 'PROGRESS_ENDING';
 
 // Страница списка доступных курсов
 
-const Courses = ({ id, setCourse, openSettings }) => {
+const Courses = ({ id, setCourse }) => {
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {
@@ -39,13 +38,6 @@ const Courses = ({ id, setCourse, openSettings }) => {
                     <Title level="2" weight="medium">
                         Все курсы
                     </Title>
-                    <Button
-                        mode="tertiary"
-                        style={{ padding: '0 0px', margin: 0, height: 'auto' }}
-                        onClick={openSettings}
-                    >
-                        <Icon28SettingsOutline />
-                    </Button>
                 </Div>
                 {/* 
                     Добавить недельный прогресс
@@ -53,16 +45,16 @@ const Courses = ({ id, setCourse, openSettings }) => {
                 {courses.length === 0 ? (
                     <PanelSpinner size="medium" />
                 ) : (
-                    courses.map(course => {
-                        return (
-                            <CourseCard
-                                course={course}
-                                setCourse={setCourse}
-                                key={course.id}
-                            />
-                        );
-                    })
-                )}
+                        courses.map(course => {
+                            return (
+                                <CourseCard
+                                    course={course}
+                                    setCourse={setCourse}
+                                    key={course.id}
+                                />
+                            );
+                        })
+                    )}
             </Group>
         </Panel>
     );
