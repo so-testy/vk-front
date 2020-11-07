@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
-import Group from '@vkontakte/vkui/dist/components/Group/Group';
-import { Title, Div, PanelSpinner } from '@vkontakte/vkui';
+import { Title, Div, PanelSpinner, PanelHeader, Card, Group } from '@vkontakte/vkui';
 
 import CourseCard from '../../../components/CourseCard/index';
+import WeekProgress from '../../../components/Training/Root/WeekProgress/index';
+
 import config from '../../../config';
 
 import mockCourses from './mockCourses';
@@ -24,6 +24,7 @@ const Courses = ({ setCourse }) => {
     return (
         <>
             <PanelHeader>{config.appName}</PanelHeader>
+            <WeekProgress />
             <Group separator="hide" style={{ marginBottom: 16 }}>
                 <Div
                     style={{
@@ -35,12 +36,9 @@ const Courses = ({ setCourse }) => {
                     }}
                 >
                     <Title level="2" weight="medium">
-                        Все курсы
+                        Рекомендуем
                     </Title>
                 </Div>
-                {/* 
-                    Добавить недельный прогресс
-                */}
                 {courses.length === 0 ? (
                     <PanelSpinner size="medium" />
                 ) : (
