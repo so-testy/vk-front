@@ -30,7 +30,7 @@ export const frequency = [{
 
 const Notification = ({ navStore, useStore }) => {
     const [notification, setNotification] = useState({
-        isEnadled: false,
+        isEnabled: false,
         regularity: 'EVERY_DAYS',
         frequency: '2_HOURS',
         time: {
@@ -46,7 +46,7 @@ const Notification = ({ navStore, useStore }) => {
     //     }
     // }, [useStore.notification]);
 
-    const toggleNotification = () => setNotification({ ...notification, isEnadled: !notification.isEnadled });
+    const toggleNotification = () => setNotification({ ...notification, isEnabled: !notification.isEnabled });
 
     return (<>
         <PanelHeader
@@ -56,14 +56,14 @@ const Notification = ({ navStore, useStore }) => {
         >Уведомления</PanelHeader>
         <FormLayout>
             <Checkbox onClick={toggleNotification}>Напоминать делать зарядку</Checkbox>
-            <Select top="Регулярность" disabled={!notification.isEnadled}>
+            <Select top="Регулярность" disabled={!notification.isEnabled}>
                 {
                     regularity.map(r => (
                         <option value={r.value} selected={r.value === notification.regularity}>{r.title}</option>
                     ))
                 }
             </Select>
-            <Select top="Частота" disabled={!notification.isEnadled}>
+            <Select top="Частота" disabled={!notification.isEnabled}>
                 {
                     frequency.map(f => (
                         <option value={f.value} selected={f.value === notification.frequency}>{f.title}</option>
@@ -76,7 +76,7 @@ const Notification = ({ navStore, useStore }) => {
                 max={23}
                 step={1}
                 value={[notification.time.start, notification.time.end]}
-                disabled={!notification.isEnadled}
+                disabled={!notification.isEnabled}
                 bottom={(
                     <Text>
                         Уведомлять в промежутке C {notification.time.start} до {notification.time.end} часов

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Title, Div, PanelSpinner, PanelHeader, Card, Group } from '@vkontakte/vkui';
+import { Title, Div, PanelSpinner, PanelHeader, Group } from '@vkontakte/vkui';
 
 import CourseCard from '../../../components/CourseCard/index';
 import WeekProgress from '../../../components/Training/Root/WeekProgress/index';
