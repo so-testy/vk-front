@@ -1,3 +1,4 @@
+import CourseStore from './courseStore'
 import NavStore from './navStore'
 import UserStore from './userStore'
 
@@ -7,5 +8,6 @@ export default {
         panel: 'root',
         modal: null
     }),
-    userStore: new UserStore()
+    userStore: new UserStore(),
+    courseStore: new CourseStore()
 }

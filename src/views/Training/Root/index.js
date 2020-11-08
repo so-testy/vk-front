@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { inject, observer } from 'mobx-react';
 
 import { Title, Div, PanelSpinner, PanelHeader, Group } from '@vkontakte/vkui';
 
-import CourseCard from '../../../components/CourseCard/index';
+import CourseCard from '../../../components/Training/Root/CourseCard/index';
 import WeekProgress from '../../../components/Training/Root/WeekProgress/index';
 
 import config from '../../../config';
 
-import mockCourses from './mockCourses';
+const Courses = ({ navStore, courseStore }) => {
 
-export const PROGRESS_NONE = 'PROGRESS_NONE';
-export const PROGRESS_ENDING = 'PROGRESS_ENDING';
-
-// Страница списка доступных курсов
-
-const Courses = ({ setCourse }) => {
-    const [courses, setCourses] = useState([]);
-
-    useEffect(() => {
-        setCourses(mockCourses);
-    }, []);
+    const onCourseClick = (id) => {
+        courseStore.setCourseById(id);
+        navStore.setActiveView("training", "course");
+    }
 
     return (
         <>
@@ -39,15 +33,15 @@ const Courses = ({ setCourse }) => {
                         Рекомендуем
                     </Title>
                 </Div>
-                {courses.length === 0 ? (
+                {courseStore.isLoading ? (
                     <PanelSpinner size="medium" />
                 ) : (
-                        courses.map(course => {
+                        courseStore.courses.map(course => {
                             return (
                                 <CourseCard
+                                    key={course._id}
                                     course={course}
-                                    setCourse={setCourse}
-                                    key={course.id}
+                                    onClick={() => onCourseClick(course._id)}
                                 />
                             );
                         })
@@ -57,4 +51,4 @@ const Courses = ({ setCourse }) => {
     );
 };
 
-export default Courses;
+export default inject('navStore', 'courseStore')(observer(Courses));

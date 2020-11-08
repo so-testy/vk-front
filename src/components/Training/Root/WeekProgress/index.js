@@ -83,7 +83,7 @@ const WeekProgress = ({ userStore }) => {
                 </Title>
                 <StyledWeekActivities>
                     {activities.map(activity => (
-                        <StyledWeekActivity id={activity.id}>
+                        <StyledWeekActivity key={activity.id}>
                             {activity.day}
                             {activity.isExist && (
                                 <StyledWeekActivityStatus>

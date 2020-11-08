@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import { inject, observer } from 'mobx-react';
 
-import Icon20CheckCircleFillGreen from '@vkontakte/icons/dist/20/check_circle_fill_green';
 import {
     CardGrid,
     Card,
@@ -9,18 +8,12 @@ import {
     Text,
     PanelHeaderBack,
     FixedLayout,
-    Snackbar,
-    Avatar,
     PanelHeader,
     Button,
     Group,
     Div
 } from '@vkontakte/vkui';
 
-// TODO: удалить
-import NavigationContext from '../../../NavigationContext';
-
-import mockCourse from './mockCourse';
 
 const getDuration = duration => {
     const minutes = Math.floor(duration / 60);
@@ -32,50 +25,18 @@ const getDuration = duration => {
     };
 };
 
-// Страница списка упражнений
-
-const Courses = ({ course, setExercise, navStore }) => {
-    const [exercises, setExercises] = useState([]);
-
-    useEffect(() => {
-        setExercises(mockCourse);
-    }, []);
-
-    const isWasStarted =
-        exercises.filter(exercise => exercise.isDone).length > 0;
-
-    const firstNotStartedExercise = exercises.find(
-        exercise => !exercise.isDone,
-    );
-
-    const { routeProps } = useContext(NavigationContext);
+const Courses = ({ courseStore, navStore }) => {
 
     return (
         <>
             <PanelHeader
                 left={<PanelHeaderBack onClick={() => navStore.setActiveView("training", "root")} />}>
-                {course.title}
+                {courseStore.currCourse.title}
             </PanelHeader>
-            {routeProps.isExerciseFinished && (
-                <Snackbar
-                    layout="vertical"
-                    onClose={() => { }}
-                    before={
-                        <Avatar size={24}>
-                            <Icon20CheckCircleFillGreen
-                                width={24}
-                                height={24}
-                            />
-                        </Avatar>
-                    }
-                >
-                    Задание успешно выполнено
-                </Snackbar>
-            )}
             <Group
                 separator="hide"
                 style={{
-                    marginBottom: firstNotStartedExercise ? 74 : 16,
+                    marginBottom: 16,
                 }}
             >
                 <Div style={{ marginBottom: 4 }}>
@@ -84,7 +45,7 @@ const Courses = ({ course, setExercise, navStore }) => {
                     </Title>
                 </Div>
                 <CardGrid>
-                    {exercises.map(exercise => {
+                    {courseStore.currCourse.exercises.map(exercise => {
                         const { minutes, seconds } = getDuration(
                             exercise.duration,
                         );
@@ -100,9 +61,9 @@ const Courses = ({ course, setExercise, navStore }) => {
                                 mode="shadow"
                                 key={exercise.id}
                                 style={{ marginTop: 12 }}
-                                onClick={() => {
-                                    setExercise(exercise);
-                                }}
+                            // onClick={() => {
+                            //     setExercise(exercise);
+                            // }}
                             >
                                 <Div>
                                     <Title
@@ -143,24 +104,20 @@ const Courses = ({ course, setExercise, navStore }) => {
                     })}
                 </CardGrid>
             </Group>
-            {firstNotStartedExercise && (
-                <FixedLayout vertical="bottom">
-                    <Div>
-                        <Button
-                            size="xl"
-                            onClick={() => {
-                                setExercise(firstNotStartedExercise);
-                            }}
-                        >
-                            {isWasStarted
-                                ? 'Продолжить занятие'
-                                : 'Начать занятие'}
+            <FixedLayout vertical="bottom">
+                <Div>
+                    <Button
+                        size="xl"
+                        onClick={() => {
+                            // setExercise(firstNotStartedExercise);
+                        }}
+                    >
+                        Начать занятие
                         </Button>
-                    </Div>
-                </FixedLayout>
-            )}
+                </Div>
+            </FixedLayout>
         </>
     );
 };
 
-export default inject('navStore')(observer(Courses));
+export default inject('navStore', 'courseStore')(observer(Courses));

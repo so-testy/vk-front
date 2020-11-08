@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { observer, inject } from "mobx-react";
 
 import { Epic, Tabbar, View, TabbarItem, Panel } from "@vkontakte/vkui";
@@ -17,9 +17,6 @@ import "@vkontakte/vkui/dist/vkui.css";
 // View & Panel определяем здесь
 
 const App = ({ navStore }) => {
-
-    const [course, setCourse] = useState(null);
-    const [exercise, setExercise] = useState(null);
 
     return (
         <Epic
@@ -47,31 +44,13 @@ const App = ({ navStore }) => {
         >
             <View id="training" activePanel={navStore.activePanel}>
                 <Panel id="root">
-                    <TrainingRootPanel
-                        // TODO: не передовать в пропсы
-                        // создать для этого отдельный mobx store
-                        setCourse={(course) => {
-                            setCourse(course);
-                            navStore.setActiveView("training", "course");
-                        }}
-                    />
+                    <TrainingRootPanel />
                 </Panel>
                 <Panel id="course">
-                    <TrainingCoursePanel
-                        // TODO: не передовать в пропсы
-                        // создать для этого отдельный mobx store
-                        course={course}
-                        setExercise={(exercise) => {
-                            setExercise(exercise);
-                            navStore.setActiveView("training", "exercise");
-                        }}
-                    />
+                    <TrainingCoursePanel />
                 </Panel>
                 <Panel id="exercise">
-                    <TrainingExercisePanel
-                        // TODO: не передовать в пропсы
-                        // создать для этого отдельный mobx store
-                        exercise={exercise} />
+                    <TrainingExercisePanel />
                 </Panel>
             </View>
 
